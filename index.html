@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" rel="stylesheet">
+
+    <link href="./css/index.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+</head>
+
+
+<body>
+<header>
+    <div class="logo">P</div>
+    <div class="header_gd"><img alt="" src="./images/更多.png"></div>
+    <div class="admin_top">
+        <div class="admin_logo"></div>
+        <span>系统管理</span>
+    </div>
+</header>
+
+
+<script src="./js/jQuery.js"></script>
+<script src="./js/template.js"></script>
+
+
+<script id="tpl-owin">
+    {{each $data}}
+    <tr>
+        <td><input type="checkbox" class="fxk"></td>
+
+
+        <td>{{$value.id}}</td>
+        <td>{{$value.name}}</td>
+        <td>{{$value.home_number}}</td>
+        <td>{{$value.phone_number}}</td>
+        <td>{{$value.park_lot}}</td>
+        <td>
+            {{if $value.carlist}}
+            {{each $value.carlist}}
+            {{if $index}}
+            {{else}}
+            <span>{{$value.license}}</span>
+
+            {{/if}}
+
+            {{/each}}
+            {{/if}}
+                </td>
+                <td>
+            {{if $value.carlist[0]}}
+                <img src={{$value.carlist[0] | img}} style="height:30px">
+
+
+            {{/if}}
+                </td>
+                <td>
+            {{if $value.park_state == "0"}}
+                <span>空位<span>
+            {{else if $value.park_state == "1"}}
+                <span>已停</span>
+            {{/if}}
+                </td>
+                <td>{{$value.create_time | dateFormat}}</td>
+                <td>{{$value.update_time | dateFormatUp}}</td>
+                <td>
+                <button class="btn btn-success btn-Update" type="button">编辑</button>
+
+                <div class="Update_Div">
+                <div class="Update_small">
+                <div >
+                <span>*</span>
+                <span style="margin-right:21px">姓名:</span>
+                <input type="text" class="update_name" value="{{$value.name}}">
+                </div>
+                <div >
+                <span>*</span>
+                <span style="margin-right:12px">房间号</span>
+                <input type="text" class="update_Homenumber" value="{{$value.home_number}}">
+                </div>
+                <div >
+                <span>*</span>
+                <span style="margin-right:12px">手机号</span>
+                <input type="text" class="update_Phonenumber" value="{{$value.phone_number}}">
+                </div>
+                <div >
+                <span>*</span>
+                <span style="margin-right:12px">车位号</span>
+                <input type="text" class="update_Parklot" value="{{$value.park_lot}}" >
+                </div>
+                <div >
+                <span>*</span>
+                <span >车位状态</span>
+                <input type="text" class="update_Parkstate" value="{{if $value.park_state=="0"}}空位{{else if $value.park_state == "1"}}已停{{/if}}">
+                </div>
+                <div class="btn_eC">
+                <button class=" btn_Uptitle">更新</button>
+                <button class="btn_Exit btn_Uexit">取消</button><div>
+
+                </div>
+                </div>
+
+                </div>
+                </div>
+
+
+
+                <button class="btn btn-danger" type="button">删除</button>
+                <div class="btn_danger_big">
+                <div class="btn_danger_title">
+                <div class="btn_danger_title_top">
+                <div class="xtts">系统提示</div>
+                <div class="xtts_img">×</div>
+                </div>
+                <div class="xtts_title"><p>是否删除该条用户信息</p>   </div>
+                <div class="btn_danger_title_botton">
+                <div class="delete_btn">删除</div>
+                <div class="exit_btn">返回</div>
+                </div>
+                </div>
+                </div>
+
+
+
+                <button type="button" class="btn btn-info">车辆信息</button>
+                <div class="car_big">
+                <div class="car_small">
+                <div class="car_top"><p>个人主页</p> <div class="car_down">x</div></div>
+                <div class="car_title">
+                <div><span>姓名:</span>{{$value.name}}</div>
+                <div class="car_cph">
+
+                <span>您的车辆有：</span>  <div class="car_license">
+
+                </div>
+                </div>
+                <div class="car_help">更多车辆操作</div>
+
+                </div>
+
+                <div class="car_bottom">
+                <div class="car_Create">新增</div>
+
+
+                <div class="car_Delete">删除</div>
+                <div class="car_Update">更新</div>
+                </div>
+                </div>
+
+                </div>
+                </td>
+                </tr>
+            {{/each}}
+</script>
+<script src="./js/index.js"></script>
+<div class="conter">
+    <div class="nav_top">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="exampleInputName2">登录名称：</label>
+                <input class="form-control" id="exampleInputName2" type="text">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">手机号码：</label>
+                <input class="form-control" id="exampleInputEmail2" type="email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail2">用户状态：</label>
+                <select id="" name="status">
+                    <option>所有</option>
+                    <option>正常</option>
+                    <option>停用</option>
+                </select>
+            </div>
+            <div class="form-group form_date">
+                <label for="exampleInputEmail2">创建时间：</label>
+                <input class="form-control" style="width: 120px;" type="date">
+                -
+                <input class="form-control" style="width: 120px;" type="date">
+            </div>
+            <div class="form-group form_btn">
+                <span>搜索</span><span>重置</span>
+            </div>
+
+        </form>
+
+
+    </div>
+    <div class="nav_title">
+        <button class="btn btn-success btn-xincreate" type="button">新增</button>
+        <!--        <button class="btn  btn-qxDELETE" type="button">删除</button>-->
+
+
+    </div>
+    <table class="tb_owin table table-hover">
+        <thead>
+        <tr>
+            <th>
+                <input class="qxk" type="checkbox">
+                <span>全选</span>
+            </th>
+            <th>
+
+                用户ID
+            </th>
+            <th>
+
+                姓名
+            </th>
+            <th>房号</th>
+            <th>
+
+                手机号
+            </th>
+            <th>
+
+                车位号
+            </th>
+
+            <th>
+
+                车牌号
+            </th>
+            <th>汽车图片</th>
+            <th>
+
+                车位状态
+            </th>
+            <th>
+
+                创建时间
+            </th>
+            <th>
+
+                最后更新时间
+            </th>
+            <th>
+
+                操作
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        </tbody>
+    </table>
+
+    <div class="table_view">
+        <div class="table_view_left"></div>
+        <div class="table_view_title"><span class="fy_left">1</span><span style="margin-right: 5px"> /</span><span
+                class="fy_right"></span></div>
+        <div class="table_view_right"></div>
+
+    </div>
+
+    <div class="create_big">
+        <div class="create_title">
+            <div style="width:300px;font-size:18px;">基本信息</div>
+            <div>
+                <span>*</span>
+                <span style="margin-right:21px">姓名:</span>
+                <input class="post_name" placeholder="请输入姓名" type="text">
+            </div>
+            <div>
+                <span>*</span>
+                <span style="margin-right:12px">房间号</span>
+                <input class="post_Homenumber" placeholder="请输入房间号" type="text">
+            </div>
+            <div>
+                <span>*</span>
+                <span style="margin-right:12px">手机号</span>
+                <input class="post_Phonenumber" placeholder="请输入手机号" type="text">
+            </div>
+            <div>
+                <span>*</span>
+                <span style="margin-right:12px">车位号</span>
+                <input class="post_Parklot" placeholder="请输入车位号" type="text">
+            </div>
+            <div>
+                <span>*</span>
+                <span>车位状态</span>
+                <input class="post_Parkstate" placeholder="已停/空位" type="text">
+            </div>
+
+            <div class="btn_eC">
+                <button class="btn_Create">添加</button>
+                <button class="btn_Exit">取消</button>
+                <div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="car_cre">
+        <div class="center">
+            <div class="qx">
+                <p>新增页面</p>
+                <p class="cre_hide">x</p>
+            </div>
+            <div class="center_top">
+
+                <div class="iptDiv">
+
+                    <input class="ipt_one" type="text">
+                </div>
+                <div class="iptDiv">
+
+                    <input class="rup" type="text">
+                </div>
+                <div class="iptDiv">
+
+                    <input class="rup" type="text">
+                </div>
+                <div class="iptDiv">
+
+                    <input class="rup" type="text">
+                </div>
+                <div class="iptDiv">
+
+                    <input class="rup" type="text">
+                </div>
+                <div class="iptDiv">
+
+                    <input class="rup" type="text">
+                </div>
+                <div class="iptDiv">
+
+                    <input class="rup" type="text">
+                </div>
+
+            </div>
+            <div class="file_big">
+                <p>+</p><input class="car_file" id="car_file" type="file">
+                <button id="dj">显示图片</button>
+            </div>
+            <div class="center_bottom">新增</div>
+        </div>
+    </div>
+
+    <div class="car_update_big">
+        <div class="car_updateli">您可选择的车辆有 <p class="uphidecar">x</p>
+            <div class="car_title_new"></div>
+        </div>
+        <div class="car_update_small">
+            <div class="upgx">
+                <p>更新页面</p>
+                <p class="updatehide">x</p>
+            </div>
+            <div class="center_top">
+
+                <div class="iptDivU">
+
+                    <input class="ipt_toneup" type="text">
+                </div>
+                <div class="iptDivU">
+
+                    <input class="r" type="text">
+                </div>
+                <div class="iptDivU">
+
+                    <input class="r" type="text">
+                </div>
+                <div class="iptDivU">
+
+                    <input class="r" type="text">
+                </div>
+                <div class="iptDivU">
+
+                    <input class="r" type="text">
+                </div>
+                <div class="iptDivU">
+
+                    <input class="r" type="text">
+                </div>
+                <div class="iptDivU">
+
+                    <input class="r" type="text">
+                </div>
+
+            </div>
+            <div class="file_big">
+                <p>+</p><input class="car_fileup" id="car_upfile" type="file">
+                <button id="updj">显示图片</button>
+            </div>
+            <div class="center_bottomUpt">更新</div>
+        </div>
+    </div>
+
+    <div class="car_delete_big">
+        <div class="car_delete_small">
+            <div class="car_delete_small_top">
+                <div>您可以删除的车辆有</div>
+                <p class="car_deletehide">x</p>
+            </div>
+            <div class="btnde">点击按钮删除!（请谨慎操作）</div>
+            <div class="car_deltitle"></div>
+
+
+        </div>
+
+    </div>
+
+    <div class="srk">
+        <div class="shuru">
+
+
+            <div class="text_title">粤</div>
+
+
+            <div class="text_title">京</div>
+            <div class="text_title">沪</div>
+            <div class="text_title">津</div>
+            <div class="text_title">浙</div>
+            <div class="text_title">苏</div>
+            <div class="text_title">湘</div>
+            <div class="text_title">赣</div>
+            <div class="text_title">鄂</div>
+            <div class="text_title">皖</div>
+            <div class="text_title">陕</div>
+            <div class="text_title">甘</div>
+            <div class="text_title">宁</div>
+            <div class="text_title">云</div>
+            <div class="text_title">贵</div>
+            <div class="text_title">川</div>
+            <div class="text_title">渝</div>
+            <div class="text_title">黑</div>
+            <div class="text_title">吉</div>
+            <div class="text_title">辽</div>
+            <div class="text_title">晋</div>
+            <div class="text_title">冀</div>
+            <div class="text_title">鲁</div>
+            <div class="text_title">晋</div>
+            <div class="text_title">闽</div>
+            <div class="text_title">琼</div>
+            <div class="text_title">桂</div>
+            <div class="text_title">蒙</div>
+            <div class="text_title">青</div>
+            <div class="text_title">藏</div>
+            <div class="text_title">新</div>
+            <div class="text_title">使</div>
+            <div class="text_title">无</div>
+        </div>
+        <div class=" szzm">
+
+
+            <div class="szzm_title shu">1</div>
+            <div class="szzm_title shu">2</div>
+            <div class="szzm_title shu">3</div>
+            <div class="szzm_title shu">4</div>
+            <div class="szzm_title shu">5</div>
+            <div class="szzm_title shu">6</div>
+            <div class="szzm_title shu">7</div>
+            <div class="szzm_title shu">8</div>
+            <div class="szzm_title shu">9</div>
+            <div class="szzm_title shu">0</div>
+
+            <div class="szzm_title shu">A</div>
+            <div class="szzm_title shu">B</div>
+            <div class="szzm_title shu">C</div>
+            <div class="szzm_title shu">D</div>
+            <div class="szzm_title shu">E</div>
+            <div class="szzm_title shu">F</div>
+            <div class="szzm_title shu">G</div>
+            <div class="szzm_title shu">H</div>
+            <div class="szzm_title shu">J</div>
+            <div class="szzm_title shu">K</div>
+            <div class="szzm_title shu">L</div>
+            <div class="szzm_title shu">M</div>
+            <div class="szzm_title shu">N</div>
+            <div class="szzm_title shu" style="background:#e5e5e5">O</div>
+            <div class="szzm_title shu">P</div>
+            <div class="szzm_title shu">Q</div>
+            <div class="szzm_title shu">R</div>
+            <div class="szzm_title shu">S</div>
+            <div class="szzm_title shu">T</div>
+            <div class="szzm_title shu">U</div>
+            <div class="szzm_title shu">V</div>
+            <div class="szzm_title shu">W</div>
+            <div class="szzm_title shu">X</div>
+            <div class="szzm_title shu">Y</div>
+            <div class="szzm_title shu">Z</div>
+
+            <div class="szzm_title shu">X</div>
+            <div class="szzm_title shu">Z</div>
+
+<!--            <div class="szzm_title shu Del_shu">DEL</div>-->
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>
