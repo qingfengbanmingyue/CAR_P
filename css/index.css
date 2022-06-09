@@ -523,6 +523,7 @@ select {
     padding: 40px 80px;
     position: absolute;
     top: 10%;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
     background: #fff;

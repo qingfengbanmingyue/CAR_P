@@ -556,6 +556,7 @@ $(function () {
                         $('.car_delete_big').show()
                         $('.car_deletehide').click(function (){
                             $('.car_delete_big').hide()
+                            $('.car_deltitle').html('')
                         })
                         console.log(res.results[index].carlist.length)
                         if(res.results[index].carlist.length!==0){
@@ -1037,6 +1038,7 @@ $(function () {
                         $('.car_delete_big').show()
                         $('.car_deletehide').click(function (){
                             $('.car_delete_big').hide()
+                            $('.car_deltitle').html('')
                         })
                         console.log(res.results[index].carlist.length)
                         if(res.results[index].carlist.length!==0){
@@ -1127,7 +1129,7 @@ $(function () {
 
                                 alert("更新成功")
 
-                                location.reload(true)
+                                location.reload()
                             },
                             error(res) {
                                 console.log("更新失败" + res)
@@ -1520,6 +1522,7 @@ $(function () {
                     $('.car_delete_big').show()
                     $('.car_deletehide').click(function (){
                         $('.car_delete_big').hide()
+                        $('.car_deltitle').html('')
                     })
                     console.log(res.results[index].carlist.length)
                     if(res.results[index].carlist.length!==0){
